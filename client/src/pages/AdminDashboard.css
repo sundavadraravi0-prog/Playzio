@@ -1,0 +1,14 @@
+/* Admin Dashboard specific styles */
+#admin-page .stats-grid .stat-card-value {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#admin-page .table img {
+  display: inline-block;
+}
+
+#admin-page .modal {
+  max-width: 640px;
+}

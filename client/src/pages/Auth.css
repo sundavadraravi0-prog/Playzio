@@ -1,0 +1,22 @@
+.auth-page { display: flex; align-items: stretch; min-height: 100vh; }
+.auth-container { display: flex; width: 100%; min-height: 100vh; }
+.auth-visual { flex: 1; background: linear-gradient(135deg, #7c3aed 0%, #a855f7 40%, #ec4899 100%); display: flex; align-items: center; justify-content: center; padding: 3rem; position: relative; overflow: hidden; }
+.auth-visual::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+.auth-visual-content { text-align: center; color: white; position: relative; z-index: 1; }
+.auth-emoji { font-size: 4rem; display: block; margin-bottom: 1.5rem; animation: float 3s ease-in-out infinite; }
+.auth-visual-content h2 { font-size: 2rem; margin-bottom: 0.75rem; color: white; }
+.auth-visual-content p { font-size: 1.1rem; color: rgba(255,255,255,0.85); max-width: 300px; line-height: 1.6; }
+.auth-form-side { flex: 1; display: flex; align-items: center; justify-content: center; padding: 3rem; background: white; }
+.auth-form-wrapper { width: 100%; max-width: 420px; }
+.auth-title { font-size: 2rem; margin-bottom: 0.25rem; }
+.auth-subtitle { color: var(--gray-500); margin-bottom: 2rem; }
+.auth-form { display: flex; flex-direction: column; }
+.input-icon-wrapper { position: relative; }
+.input-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--gray-400); }
+.input-icon-wrapper .form-input { padding-left: 2.75rem; }
+.pw-toggle { position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--gray-400); cursor: pointer; }
+.auth-switch { text-align: center; margin-top: 1.5rem; color: var(--gray-500); font-size: 0.9rem; }
+.auth-switch a { color: var(--primary); font-weight: 600; }
+.demo-credentials { margin-top: 1.5rem; padding: 1rem; background: var(--gray-50); border-radius: var(--radius-md); text-align: center; font-size: 0.85rem; color: var(--gray-500); border: 1px dashed var(--gray-300); }
+.demo-credentials strong { color: var(--gray-700); }
+@media (max-width: 768px) { .auth-visual { display: none; } .auth-form-side { padding: 2rem 1.5rem; } }
