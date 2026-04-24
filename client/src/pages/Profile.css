@@ -1,6 +1,6 @@
 .profile-header { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; margin-bottom: 1.5rem; }
 .profile-header:hover { transform: none; }
-.profile-avatar { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent-pink)); color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 700; font-family: var(--font-display); }
+.profile-avatar { width: 70px; height: 70px; border-radius: 50%; background: #6366f1; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 700; font-family: 'Outfit', sans-serif; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); }
 .profile-header h2 { margin-bottom: 0.15rem; }
 .form-row { display: flex; gap: 1rem; }
 .form-row .form-group { flex: 1; }

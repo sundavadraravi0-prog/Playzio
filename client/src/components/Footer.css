@@ -19,10 +19,11 @@
   margin-bottom: 1rem;
 }
 
-.footer-logo-text {
-  font-family: var(--font-display);
-  font-weight: 700;
-  color: white;
+
+.footer-logo-image {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
 }
 
 .footer-desc {

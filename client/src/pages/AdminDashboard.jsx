@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FaBox, FaShoppingBag, FaUsers, FaRupeeSign, FaPlus, FaEdit, FaTrash, FaTimes } from 'react-icons/fa';
+import { FaBox, FaShoppingBag, FaUsers, FaRupeeSign, FaPlus, FaEdit, FaTrash, FaTimes, FaPrint } from 'react-icons/fa';
 import { adminAPI } from '../services/api';
 import ReviewStars from '../components/ReviewStars';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -163,13 +163,13 @@ const AdminDashboard = () => {
                     <h3 style={{ marginBottom: '1rem' }}>Recent Orders</h3>
                     <div className="table-container">
                       <table className="table">
-                        <thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th><th>Date</th></tr></thead>
+                        <thead><tr><th>Invoice</th><th>Customer</th><th>Total</th><th>Status</th><th>Date</th></tr></thead>
                         <tbody>
                           {stats.recentOrders.map(order => (
                             <tr key={order._id}>
-                              <td>#{order._id.slice(-8).toUpperCase()}</td>
+                              <td>{order.invoiceNumber || `#${order._id.slice(-8).toUpperCase()}`}</td>
                               <td>{order.user?.name || 'N/A'}</td>
-                              <td><strong>₹{order.totalPrice.toFixed(0)}</strong></td>
+                              <td><strong>₹{(order.totalAmount || order.totalPrice).toFixed(0)}</strong></td>
                               <td><span className={`badge badge-status badge-${order.status}`}>{order.status}</span></td>
                               <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                             </tr>
@@ -218,14 +218,14 @@ const AdminDashboard = () => {
             {activeTab === 'orders' && (
               <div className="table-container">
                 <table className="table">
-                  <thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Date</th></tr></thead>
+                  <thead><tr><th>Invoice</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
                   <tbody>
                     {orders.map(order => (
                       <tr key={order._id}>
-                        <td>#{order._id.slice(-8).toUpperCase()}</td>
+                        <td>{order.invoiceNumber || `#${order._id.slice(-8).toUpperCase()}`}<br /><small style={{ color: 'var(--gray-400)' }}>{new Date(order.createdAt).toLocaleDateString()}</small></td>
                         <td>{order.user?.name || 'N/A'}<br /><small style={{ color: 'var(--gray-400)' }}>{order.user?.email}</small></td>
                         <td>{order.items.length} items</td>
-                        <td><strong>₹{order.totalPrice.toFixed(0)}</strong></td>
+                        <td><strong>₹{(order.totalAmount || order.totalPrice).toFixed(0)}</strong></td>
                         <td>
                           <select className="form-select" style={{ width: 'auto', padding: '0.3rem 0.6rem', fontSize: '0.8rem' }} value={order.status} onChange={e => handleOrderStatus(order._id, e.target.value)}>
                             {['pending', 'processing', 'shipped', 'delivered', 'cancelled'].map(s => (
@@ -233,7 +233,13 @@ const AdminDashboard = () => {
                             ))}
                           </select>
                         </td>
-                        <td>{new Date(order.createdAt).toLocaleDateString()}</td>
+                        <td>
+                          <div style={{ display: 'flex', gap: '0.5rem' }}>
+                            <a href={`/order/invoice/${order._id}`} target="_blank" rel="noreferrer" className="btn btn-secondary btn-sm" title="View Invoice">
+                              <FaPrint />
+                            </a>
+                          </div>
+                        </td>
                       </tr>
                     ))}
                   </tbody>

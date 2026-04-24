@@ -2,14 +2,20 @@ import { useState } from 'react';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaPaperPlane } from 'react-icons/fa';
 import { contactAPI } from '../services/api';
 import toast from 'react-hot-toast';
+import { useAuth } from '../context/AuthContext';
 import './About.css';
 
 const About = () => {
+  const { user } = useAuth();
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!user) {
+      toast.error('Please login to send a message');
+      return;
+    }
     setLoading(true);
     try {
       await contactAPI.submit(form);
@@ -85,20 +91,23 @@ const About = () => {
 
           <div className="contact-layout">
             <div className="contact-info">
-              <div className="contact-item"><FaMapMarkerAlt className="contact-icon" /><div><strong>Address</strong><p>123 Toy Lane, Fun City, FC 12345</p></div></div>
-              <div className="contact-item"><FaPhone className="contact-icon" /><div><strong>Phone</strong><p>+1 (555) 123-4567</p></div></div>
+              <div className="contact-item"><FaMapMarkerAlt className="contact-icon" /><div><strong>Address</strong><p>7 Toy Lane, Fun City</p></div></div>
+              <div className="contact-item"><FaPhone className="contact-icon" /><div><strong>Phone</strong><p>+91 9586977777</p></div></div>
               <div className="contact-item"><FaEnvelope className="contact-icon" /><div><strong>Email</strong><p>hello@playzio.com</p></div></div>
-              <div className="contact-item"><FaClock className="contact-icon" /><div><strong>Hours</strong><p>Mon-Sat: 9AM - 8PM</p></div></div>
+              <div className="contact-item"><FaClock className="contact-icon" /><div><strong>24/7 Available</strong></div></div>
             </div>
 
             <form className="contact-form card" onSubmit={handleSubmit}>
               <div className="form-row">
-                <div className="form-group"><label className="form-label">Name</label><input className="form-input" value={form.name} onChange={e => setForm({...form, name: e.target.value})} required id="contact-name" /></div>
-                <div className="form-group"><label className="form-label">Email</label><input className="form-input" type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} required id="contact-email" /></div>
+                <div className="form-group"><label className="form-label">Name</label><input className="form-input" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required id="contact-name" /></div>
+                <div className="form-group"><label className="form-label">Email</label><input className="form-input" type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} required id="contact-email" /></div>
               </div>
-              <div className="form-group"><label className="form-label">Subject</label><input className="form-input" value={form.subject} onChange={e => setForm({...form, subject: e.target.value})} id="contact-subject" /></div>
-              <div className="form-group"><label className="form-label">Message</label><textarea className="form-input" rows="5" value={form.message} onChange={e => setForm({...form, message: e.target.value})} required id="contact-message" /></div>
-              <button type="submit" className="btn btn-primary btn-lg" disabled={loading} id="contact-submit"><FaPaperPlane /> {loading ? 'Sending...' : 'Send Message'}</button>
+              <div className="form-group"><label className="form-label">Subject</label><input className="form-input" value={form.subject} onChange={e => setForm({ ...form, subject: e.target.value })} id="contact-subject" /></div>
+              <div className="form-group"><label className="form-label">Message</label><textarea className="form-input" rows="5" value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} required id="contact-message" /></div>
+              <button type="submit" className="btn btn-primary btn-lg" disabled={loading} id="contact-submit">
+                <FaPaperPlane /> {loading ? 'Sending...' : 'Send Message'}
+              </button>
+              {!user && <p className="login-hint" style={{ color: 'var(--primary-color)', marginTop: '10px', fontSize: '0.9rem' }}>Please login to send a message</p>}
             </form>
           </div>
         </div>

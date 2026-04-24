@@ -9,8 +9,7 @@ const Footer = () => {
         <div className="footer-grid">
           <div className="footer-brand">
             <Link to="/" className="footer-logo">
-              {/* <span>🧸</span> */}
-              <span className="footer-logo-text">Playzio</span>
+              <img src="/playzio-logo.png" alt="Playzio Logo" className="footer-logo-image" />
             </Link>
             <p className="footer-desc">
               The ultimate toy store for kids! We bring joy and imagination to children of all ages with our curated collection of toys, games, and educational tools.

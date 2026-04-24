@@ -13,7 +13,7 @@ const getStats = async (req, res, next) => {
       User.countDocuments(),
       Order.aggregate([
         { $match: { status: { $ne: 'cancelled' } } },
-        { $group: { _id: null, total: { $sum: '$totalPrice' } } }
+        { $group: { _id: null, total: { $sum: '$totalAmount' } } }
       ])
     ]);
 

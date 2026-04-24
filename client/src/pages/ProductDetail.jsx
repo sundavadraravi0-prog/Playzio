@@ -116,7 +116,7 @@ const ProductDetail = () => {
               <button className="btn btn-primary btn-lg" onClick={() => addToCart(product, quantity)} disabled={product.stock === 0} id="add-to-cart-btn">
                 <FaShoppingCart /> Add to Cart
               </button>
-              <button className={`btn btn-secondary wishlist-action ${isWished ? 'wished' : ''}`} onClick={handleWishlist}>
+              <button className={`btn btn-secondary btn-lg wishlist-action ${isWished ? 'wished' : ''}`} onClick={handleWishlist} title={isWished ? "Remove from wishlist" : "Add to wishlist"}>
                 {isWished ? <FaHeart /> : <FaRegHeart />}
               </button>
             </div>

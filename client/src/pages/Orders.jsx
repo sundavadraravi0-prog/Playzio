@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { orderAPI } from '../services/api';
+import { FaPrint } from 'react-icons/fa';
 import LoadingSpinner from '../components/LoadingSpinner';
 import './Orders.css';
 
@@ -65,7 +66,10 @@ const Orders = () => {
                   ))}
                 </div>
                 <div className="order-footer">
-                  <span className="order-total">Total: <strong>₹{order.totalPrice.toFixed(0)}</strong></span>
+                  <span className="order-total">Total: <strong>₹{(order.totalAmount || order.totalPrice).toFixed(0)}</strong></span>
+                  <Link to={`/order/invoice/${order.bill?._id || order._id}`} className="btn btn-secondary btn-sm">
+                    <FaPrint /> Invoice
+                  </Link>
                 </div>
               </div>
             ))}

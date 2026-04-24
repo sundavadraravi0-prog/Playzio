@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { orderAPI } from '../services/api';
+import { FaCheckCircle, FaPrint } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import './Checkout.css';
 
@@ -12,6 +13,8 @@ const Checkout = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [address, setAddress] = useState({ street: '', city: '', state: '', zip: '', country: '' });
+  const [paymentMethod, setPaymentMethod] = useState('Credit Card');
+  const [successOrder, setSuccessOrder] = useState(null);
 
   const shipping = totalPrice >= 4000 ? 0 : 499;
   const total = totalPrice + shipping;
@@ -20,14 +23,15 @@ const Checkout = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await orderAPI.create({
+      const { data } = await orderAPI.create({
         items: items.map(i => ({ product: i._id, quantity: i.quantity })),
-        shippingAddress: address
+        shippingAddress: address,
+        paymentMethod
       });
+      setSuccessOrder(data);
       // Server clears the cart, re-fetch to sync frontend
       await fetchCart();
       toast.success('Order placed successfully');
-      navigate('/orders');
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to place order');
     } finally {
@@ -35,9 +39,38 @@ const Checkout = () => {
     }
   };
 
-  if (!user || items.length === 0) {
+  if (!user || (items.length === 0 && !successOrder)) {
     navigate('/cart');
     return null;
+  }
+
+  if (successOrder) {
+    return (
+      <div className="page" id="order-success">
+        <div className="container order-success-container">
+          <div className="card animate-slideDown success-card">
+            <div className="success-icon">
+              <FaCheckCircle />
+            </div>
+            <h1 className="page-title success-title">Order Placed!</h1>
+            <p className="success-text">
+              Thank you for your purchase! Your order <strong>#{successOrder.order._id.slice(-8).toUpperCase()}</strong> has been successfully placed.
+            </p>
+            <div className="success-actions">
+              <Link to={`/order/invoice/${successOrder.bill._id}`} className="btn btn-primary btn-lg">
+                <FaPrint /> View & Download Bill
+              </Link>
+              <Link to="/orders" className="btn btn-secondary">
+                View All Orders
+              </Link>
+              <Link to="/" className="btn btn-sm continue-shopping-link">
+                Continue Shopping
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -68,12 +101,33 @@ const Checkout = () => {
               <div className="form-row">
                 <div className="form-group">
                   <label className="form-label">ZIP Code</label>
-                  <input className="form-input" value={address.zip} onChange={e => setAddress({...address, zip: e.target.value})} required id="checkout-zip" placeholder="12345" />
+                  <input 
+                    className="form-input" 
+                    value={address.zip} 
+                    onChange={e => {
+                      const value = e.target.value.replace(/\D/g, '');
+                      setAddress({...address, zip: value});
+                    }} 
+                    required 
+                    id="checkout-zip" 
+                    placeholder="12345" 
+                  />
                 </div>
                 <div className="form-group">
                   <label className="form-label">Country</label>
                   <input className="form-input" value={address.country} onChange={e => setAddress({...address, country: e.target.value})} required id="checkout-country" placeholder="Country" />
                 </div>
+              </div>
+            </div>
+            
+            <div className="checkout-section card" style={{ marginTop: '1.5rem' }}>
+              <h2>Payment Method</h2>
+              <div className="form-group">
+                <select className="form-input" value={paymentMethod} onChange={e => setPaymentMethod(e.target.value)}>
+                  <option value="Credit Card">Credit Card</option>
+                  <option value="UPI">UPI</option>
+                  <option value="Cash on Delivery">Cash on Delivery</option>
+                </select>
               </div>
             </div>
           </div>

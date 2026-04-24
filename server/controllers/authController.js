@@ -52,13 +52,13 @@ const login = async (req, res, next) => {
     const user = await User.findOne({ email }).select('+password');
     if (!user) {
       res.status(401);
-      throw new Error('Invalid email or password');
+      throw new Error('please register first');
     }
 
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
       res.status(401);
-      throw new Error('Invalid email or password');
+      throw new Error('invalid pw or username');
     }
 
     const accessToken = generateAccessToken(user._id);
@@ -93,7 +93,7 @@ const refreshAccessToken = async (req, res, next) => {
     const token = req.cookies.refreshToken;
     if (!token) {
       res.status(401);
-      throw new Error('No refresh token');
+      throw new Error('invalid user or password');
     }
 
     const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
@@ -101,7 +101,7 @@ const refreshAccessToken = async (req, res, next) => {
 
     if (!user || user.refreshToken !== token) {
       res.status(401);
-      throw new Error('Invalid refresh token');
+      throw new Error('Invalid login or invalid user or password');
     }
 
     const accessToken = generateAccessToken(user._id);

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : '/api',
   withCredentials: true
 });
 
@@ -33,8 +33,9 @@ API.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+    const isAuthRequest = originalRequest.url.includes('/auth/login') || originalRequest.url.includes('/auth/register');
     
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 401 && !originalRequest._retry && !isAuthRequest) {
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           failedQueue.push({ resolve, reject });
@@ -48,7 +49,8 @@ API.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const { data } = await axios.post('/api/auth/refresh', {}, { withCredentials: true });
+        const refreshUrl = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/auth/refresh` : '/api/auth/refresh';
+        const { data } = await axios.post(refreshUrl, {}, { withCredentials: true });
         localStorage.setItem('accessToken', data.accessToken);
         API.defaults.headers.common['Authorization'] = `Bearer ${data.accessToken}`;
         processQueue(null, data.accessToken);
@@ -97,6 +99,12 @@ export const orderAPI = {
   create: (data) => API.post('/orders', data),
   getAll: () => API.get('/orders'),
   getOne: (id) => API.get(`/orders/${id}`),
+};
+
+// Bill API
+export const billAPI = {
+  getAll: () => API.get('/bills'),
+  getOne: (id) => API.get(`/bills/${id}`),
 };
 
 // Cart API

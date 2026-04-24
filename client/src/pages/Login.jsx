@@ -44,14 +44,14 @@ const Login = () => {
                 <label className="form-label">Email</label>
                 <div className="input-icon-wrapper">
                   <FaEnvelope className="input-icon" />
-                  <input type="email" className="form-input" placeholder="you@example.com" value={form.email} onChange={e => setForm({...form, email: e.target.value})} required id="login-email" />
+                  <input type="email" className="form-input" placeholder="you@example.com" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} required id="login-email" />
                 </div>
               </div>
               <div className="form-group">
                 <label className="form-label">Password</label>
                 <div className="input-icon-wrapper">
                   <FaLock className="input-icon" />
-                  <input type={showPw ? 'text' : 'password'} className="form-input" placeholder="Your password" value={form.password} onChange={e => setForm({...form, password: e.target.value})} required id="login-password" />
+                  <input type={showPw ? 'text' : 'password'} className="form-input" placeholder="Your password" value={form.password} onChange={e => setForm({ ...form, password: e.target.value })} required id="login-password" />
                   <button type="button" className="pw-toggle" onClick={() => setShowPw(!showPw)}>{showPw ? <FaEyeSlash /> : <FaEye />}</button>
                 </div>
               </div>
@@ -63,6 +63,21 @@ const Login = () => {
             <p className="auth-switch">
               Don't have an account? <Link to="/register">Register here</Link>
             </p>
+
+            <div className="demo-credentials" style={{ marginTop: '20px', padding: '15px', background: 'var(--surface-color, rgba(108, 92, 231, 0.1))', border: '1px solid var(--border-color, rgba(108, 92, 231, 0.2))', borderRadius: '8px', textAlign: 'center', fontSize: '0.9rem' }}>
+              <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--primary-color)' }}>Demo Admin Account</p>
+              <p style={{ margin: '5px 0 0', color: 'var(--text-color, #333)' }}>Email: <strong>admin@playzio.com</strong></p>
+              <p style={{ margin: '2px 0 0', color: 'var(--text-color, #333)' }}>Password: <strong>admin123</strong></p>
+              <button
+                type="button"
+                onClick={() => setForm({ email: 'admin@playzio.com', password: 'admin123' })}
+                style={{ marginTop: '10px', padding: '5px 15px', border: '1px solid var(--primary-color)', background: 'transparent', color: 'var(--primary-color)', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 'bold', transition: 'all 0.2s' }}
+                onMouseOver={(e) => { e.currentTarget.style.background = 'var(--primary-color)'; e.currentTarget.style.color = 'white'; }}
+                onMouseOut={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--primary-color)'; }}
+              >
+
+              </button>
+            </div>
           </div>
         </div>
       </div>

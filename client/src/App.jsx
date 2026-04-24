@@ -14,6 +14,7 @@ import Orders from './pages/Orders';
 import Wishlist from './pages/Wishlist';
 import About from './pages/About';
 import AdminDashboard from './pages/AdminDashboard';
+import Invoice from './pages/Invoice';
 import './App.css';
 
 function App() {
@@ -40,6 +41,9 @@ function App() {
           } />
           <Route path="/wishlist" element={
             <ProtectedRoute><Wishlist /></ProtectedRoute>
+          } />
+          <Route path="/order/invoice/:id" element={
+            <ProtectedRoute><Invoice /></ProtectedRoute>
           } />
           <Route path="/admin" element={
             <ProtectedRoute adminOnly><AdminDashboard /></ProtectedRoute>

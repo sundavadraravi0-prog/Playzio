@@ -20,8 +20,8 @@
 .quantity-selector button { width: 40px; height: 40px; background: var(--gray-50); border: none; font-size: 0.8rem; color: var(--gray-600); cursor: pointer; transition: background var(--transition-fast); }
 .quantity-selector button:hover { background: var(--gray-200); }
 .quantity-selector span { width: 50px; text-align: center; font-weight: 600; }
-.wishlist-action { width: 50px; height: 50px; padding: 0; border-radius: var(--radius-md); font-size: 1.2rem; }
-.wishlist-action.wished { color: var(--accent-pink); border-color: var(--accent-pink); }
+.wishlist-action { aspect-ratio: 1; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius-lg); font-size: 1.4rem; }
+.wishlist-action.wished { color: var(--error); border-color: var(--error); background-color: #fef2f2; }
 
 /* Reviews */
 .reviews-section { padding: 2rem 0; }

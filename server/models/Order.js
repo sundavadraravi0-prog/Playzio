@@ -28,7 +28,22 @@ const orderSchema = new mongoose.Schema({
     zip: { type: String, required: true },
     country: { type: String, required: true }
   },
-  totalPrice: {
+  subtotal: {
+    type: Number,
+    required: true,
+    min: 0
+  },
+  shippingPrice: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+  taxPrice: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+  totalAmount: {
     type: Number,
     required: true,
     min: 0
@@ -37,6 +52,18 @@ const orderSchema = new mongoose.Schema({
     type: String,
     enum: ['pending', 'processing', 'shipped', 'delivered', 'cancelled'],
     default: 'pending'
+  },
+  invoiceNumber: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  bill: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Bill'
+  },
+  paidAt: {
+    type: Date
   }
 }, {
   timestamps: true

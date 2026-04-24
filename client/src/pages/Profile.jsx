@@ -101,7 +101,17 @@ const Profile = () => {
               <div className="form-group"><label className="form-label">State</label><input className="form-input" value={profile.address.state || ''} onChange={e => setProfile({...profile, address: {...profile.address, state: e.target.value}})} /></div>
             </div>
             <div className="form-row">
-              <div className="form-group"><label className="form-label">ZIP</label><input className="form-input" value={profile.address.zip || ''} onChange={e => setProfile({...profile, address: {...profile.address, zip: e.target.value}})} /></div>
+                <div className="form-group">
+                  <label className="form-label">ZIP</label>
+                  <input 
+                    className="form-input" 
+                    value={profile.address.zip || ''} 
+                    onChange={e => {
+                      const value = e.target.value.replace(/\D/g, '');
+                      setProfile({...profile, address: {...profile.address, zip: value}});
+                    }} 
+                  />
+                </div>
               <div className="form-group"><label className="form-label">Country</label><input className="form-input" value={profile.address.country || ''} onChange={e => setProfile({...profile, address: {...profile.address, country: e.target.value}})} /></div>
             </div>
             <button type="submit" className="btn btn-primary" disabled={loadingProfile}><FaSave /> {loadingProfile ? 'Saving...' : 'Save Changes'}</button>

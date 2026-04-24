@@ -5,7 +5,7 @@
 /* Hero */
 .hero {
   position: relative;
-  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 40%, #ec4899 100%);
+  background: #1e3a8a; /* Deep Royal Blue */
   padding: calc(var(--navbar-height) + 3rem) 0 6rem;
   overflow: hidden;
   min-height: 600px;
@@ -36,13 +36,14 @@
 
 .hero-badge {
   display: inline-block;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(20, 184, 166, 0.2); /* Soft Teal Transparent */
   backdrop-filter: blur(10px);
   padding: 0.5rem 1.25rem;
   border-radius: var(--radius-full);
   font-weight: 600;
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
+  color: #ccfbf1;
 }
 
 .hero-title {
@@ -51,6 +52,18 @@
   color: white;
   line-height: 1.1;
   margin-bottom: 1.25rem;
+}
+
+#hero-shop-btn {
+  background: #f59e0b; /* Amber/Orange */
+  color: white;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+}
+
+#hero-about-btn {
+  background: white;
+  color: #1e3a8a;
+  border: none;
 }
 
 .gradient-text {
@@ -115,6 +128,8 @@
 .hero-emoji:hover {
   transform: scale(1.05);
 }
+
+.e10 { animation-delay: 0.9s; }
 
 
 

@@ -59,7 +59,6 @@ const Home = () => {
           </div>
           <div className="hero-visual">
             <div className="hero-emoji-grid">
-              <span className="hero-emoji e1">🧸</span>
               <span className="hero-emoji e2">🎮</span>
               <span className="hero-emoji e3">🚀</span>
               <span className="hero-emoji e4">🎨</span>
@@ -68,6 +67,7 @@ const Home = () => {
               <span className="hero-emoji e7">🎪</span>
               <span className="hero-emoji e8">🌈</span>
               <span className="hero-emoji e9">⭐</span>
+              <span className="hero-emoji e10">🧸</span>
             </div>
           </div>
         </div>

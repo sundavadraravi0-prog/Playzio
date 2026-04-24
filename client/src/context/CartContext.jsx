@@ -34,7 +34,7 @@ export const CartProvider = ({ children }) => {
     fetchCart();
   }, [fetchCart]);
 
-  // Clean up old localStorage cart data
+  // Clean up old Storage cart data
   useEffect(() => {
     localStorage.removeItem('playzio_cart');
   }, []);
