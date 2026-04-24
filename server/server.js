@@ -38,6 +38,17 @@ app.get('/api/health', (req, res) => {
 });
 
 // Error handler
+app.get('/api/seed', (req, res) => {
+  const { exec } = require('child_process');
+  exec('npm run seed', (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return res.status(500).send(`Error seeding: ${error.message}\n\n${stderr}`);
+    }
+    res.send(`Seed Output: <pre>${stdout}</pre>`);
+  });
+});
+
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
