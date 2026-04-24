@@ -302,15 +302,15 @@ const seedDB = async () => {
     console.log(`Inserted ${products.length} products`);
 
     // Create admin user
-    const adminExists = await User.findOne({ email: 'admin@playzio.com' });
+    const adminExists = await User.findOne({ email: 'abc@gmail.com' });
     if (!adminExists) {
       await User.create({
         name: 'Admin',
-        email: 'admin@playzio.com',
-        password: 'admin123',
+        email: 'abc@gmail.com',
+        password: 'abc123',
         role: 'admin'
       });
-      console.log('Created admin user (email: admin@playzio.com, password: admin123)');
+      console.log('Created admin user (email: abc@gmail.com, password: abc123)');
     }
 
     console.log('✅ Database seeded successfully!');

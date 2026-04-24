@@ -66,16 +66,16 @@ const Login = () => {
 
             <div className="demo-credentials" style={{ marginTop: '20px', padding: '15px', background: 'var(--surface-color, rgba(108, 92, 231, 0.1))', border: '1px solid var(--border-color, rgba(108, 92, 231, 0.2))', borderRadius: '8px', textAlign: 'center', fontSize: '0.9rem' }}>
               <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--primary-color)' }}>Demo Admin Account</p>
-              <p style={{ margin: '5px 0 0', color: 'var(--text-color, #333)' }}>Email: <strong>admin@playzio.com</strong></p>
-              <p style={{ margin: '2px 0 0', color: 'var(--text-color, #333)' }}>Password: <strong>admin123</strong></p>
+              <p style={{ margin: '5px 0 0', color: 'var(--text-color, #333)' }}>Email: <strong>abc@gmail.com</strong></p>
+              <p style={{ margin: '2px 0 0', color: 'var(--text-color, #333)' }}>Password: <strong>abc123</strong></p>
               <button
                 type="button"
-                onClick={() => setForm({ email: 'admin@playzio.com', password: 'admin123' })}
+                onClick={() => setForm({ email: 'abc@gmail.com', password: 'abc123' })}
                 style={{ marginTop: '10px', padding: '5px 15px', border: '1px solid var(--primary-color)', background: 'transparent', color: 'var(--primary-color)', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 'bold', transition: 'all 0.2s' }}
                 onMouseOver={(e) => { e.currentTarget.style.background = 'var(--primary-color)'; e.currentTarget.style.color = 'white'; }}
                 onMouseOut={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--primary-color)'; }}
               >
-
+                Auto Fill
               </button>
             </div>
           </div>
