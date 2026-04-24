@@ -301,16 +301,16 @@ const seedDB = async () => {
     await Product.insertMany(products);
     console.log(`Inserted ${products.length} products`);
 
-    // Create admin user
+    // Create customer user
     const adminExists = await User.findOne({ email: 'abc@gmail.com' });
     if (!adminExists) {
       await User.create({
-        name: 'Admin',
+        name: 'Customer',
         email: 'abc@gmail.com',
         password: 'abc123',
-        role: 'admin'
+        role: 'user'
       });
-      console.log('Created admin user (email: abc@gmail.com, password: abc123)');
+      console.log('Created customer user (email: abc@gmail.com, password: abc123)');
     }
 
     console.log('✅ Database seeded successfully!');

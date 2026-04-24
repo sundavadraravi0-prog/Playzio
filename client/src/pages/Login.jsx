@@ -65,7 +65,7 @@ const Login = () => {
             </p>
 
             <div className="demo-credentials" style={{ marginTop: '20px', padding: '15px', background: 'var(--surface-color, rgba(108, 92, 231, 0.1))', border: '1px solid var(--border-color, rgba(108, 92, 231, 0.2))', borderRadius: '8px', textAlign: 'center', fontSize: '0.9rem' }}>
-              <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--primary-color)' }}>Demo Admin Account</p>
+              <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--primary-color)' }}>Demo Customer Account</p>
               <p style={{ margin: '5px 0 0', color: 'var(--text-color, #333)' }}>Email: <strong>abc@gmail.com</strong></p>
               <p style={{ margin: '2px 0 0', color: 'var(--text-color, #333)' }}>Password: <strong>abc123</strong></p>
               <button
