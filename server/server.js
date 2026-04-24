@@ -15,7 +15,11 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: [
+    process.env.CLIENT_URL,
+    'http://localhost:5173',
+    'https://playzio-jhmkijpl6-sundavadraravi0-progs-projects.vercel.app'
+  ].filter(Boolean),
   credentials: true
 }));
 app.use(express.json());
